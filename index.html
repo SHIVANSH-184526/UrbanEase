@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UrbanEase — AI-Powered Smart Urban Mobility & Accessibility Platform</title>
+  <meta name="description" content="Academic Smart City Engineering Prototype for citizen mobility, accessibility, and transit reports. Real-time complaint mapping, parking, public transport, and route planners.">
+  
+  <!-- CSS Imports -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/map.css">
+  <link rel="stylesheet" href="css/complaints.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E">
+  
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+</head>
+<body>
+
+  <div id="app-root">
+    
+    <!-- Academic Prototype Banner -->
+    <div class="disclaimer-top-banner">
+      <i data-lucide="info" style="width: 14px; height: 14px; flex-shrink: 0;"></i>
+      <span>UrbanEase is an academic/prototype project and is not an official government service.</span>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header glass">
+      <div class="logo-container">
+        <a href="#/" class="logo-container">
+          <i data-lucide="shield-check" class="logo-icon" style="color: var(--primary); width: 28px; height: 28px;"></i>
+          <div style="display: flex; flex-direction: column;">
+            <span class="logo-text">UrbanEase</span>
+            <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: -3px;">Engineering Prototype</span>
+          </div>
+        </a>
+      </div>
+      
+      <!-- Sticky Navigation Links -->
+      <nav class="nav-links">
+        <a href="#/" class="nav-link active" data-route="home">Home</a>
+        <a href="#/map" class="nav-link" data-route="map">Smart Map</a>
+        <a href="#/track" class="nav-link" data-route="track">Track Complaint</a>
+        <a href="#/features" class="nav-link" data-route="features">Features</a>
+        <a href="#/vision" class="nav-link" data-route="vision">Smart City Vision</a>
+        <a href="#/faq" class="nav-link" data-route="faq">FAQ</a>
+        <a href="#/about" class="nav-link" data-route="about">About</a>
+        <a href="#/contact" class="nav-link" data-route="contact">Contact</a>
+      </nav>
+      
+      <!-- Actions -->
+      <div class="header-actions">
+        <!-- Light / Dark Mode Toggle -->
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+          <i data-lucide="moon" class="moon-icon"></i>
+          <i data-lucide="sun" class="sun-icon"></i>
+        </button>
+        
+        <!-- User Session Action -->
+        <div id="auth-header-btn">
+          <a href="#/login" class="btn btn-outline">Sign In</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Nav Bar (Shows on Small Screens) -->
+    <div class="mobile-nav-panel glass hidden" id="mobile-nav">
+      <div class="mobile-nav-items">
+        <a href="#/" class="mobile-nav-item" data-route="home"><i data-lucide="home"></i><span>Home</span></a>
+        <a href="#/map" class="mobile-nav-item" data-route="map"><i data-lucide="map"></i><span>Map</span></a>
+        <a href="#/track" class="mobile-nav-item" data-route="track"><i data-lucide="search"></i><span>Track</span></a>
+        <a href="#/features" class="mobile-nav-item" data-route="features"><i data-lucide="layers"></i><span>Features</span></a>
+        <a href="#/faq" class="mobile-nav-item" data-route="faq"><i data-lucide="help-circle"></i><span>FAQ</span></a>
+        <a href="#/about" class="mobile-nav-item" data-route="about"><i data-lucide="info"></i><span>About</span></a>
+        <a href="#/contact" class="mobile-nav-item" data-route="contact"><i data-lucide="phone"></i><span>Contact</span></a>
+      </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Main Content Dynamic Outlet -->
+    <main class="main-content" id="router-outlet">
+      <!-- Dynamic Pages will be rendered here -->
+      <div class="page-loader">
+        <div class="spinner"></div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>UrbanEase</h3>
+          <p>An AI-powered Smart Urban Mobility & Accessibility platform concept developed as an academic engineering prototype for reporting, tracking, and resolving urban infrastructure problems.</p>
+          <div style="font-size: 0.8rem; color: var(--text-muted); background: var(--card-bg); padding: 0.6rem 0.8rem; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 0.8rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+            <i data-lucide="info" style="width: 14px; height: 14px; flex-shrink: 0; color: var(--primary);"></i>
+            <span>UrbanEase is an academic/prototype project and is not an official government service.</span>
+          </div>
+          <div class="social-icons" style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <i data-lucide="facebook" style="cursor:pointer; color: var(--text-secondary);"></i>
+            <i data-lucide="twitter" style="cursor:pointer; color: var(--text-secondary);"></i>
+            <i data-lucide="linkedin" style="cursor:pointer; color: var(--text-secondary);"></i>
+            <i data-lucide="github" style="cursor:pointer; color: var(--text-secondary);"></i>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Smart Portal</h4>
+          <ul class="footer-links">
+            <li><a href="#/map">Smart Mumbai Map</a></li>
+            <li><a href="#/track">Track Complaint</a></li>
+            <li><a href="#/login">User Login</a></li>
+            <li><a href="#/admin-login">Admin Portal</a></li>
+            <li><a href="#/dashboard">User Dashboard</a></li>
+            <li><a href="#/register">Register Citizen</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Information</h4>
+          <ul class="footer-links">
+            <li><a href="#/vision">Smart City Vision</a></li>
+            <li><a href="#/features">Features Matrix</a></li>
+            <li><a href="#/faq">Citizen FAQ</a></li>
+            <li><a href="#/about">About Initiative</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Academic Prototype Office</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.5rem;">
+            <i data-lucide="map-pin" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 0.3rem;"></i>
+            Integrated Smart Mobility Lab, Mumbai Metropolitan Smart City Research Wing, Maharashtra.
+          </p>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">
+            <i data-lucide="mail" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 0.3rem;"></i>
+            prototype@urbanease.lab
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 UrbanEase — Smart City Engineering Prototype. All Rights Reserved.</p>
+        <div class="footer-legal-links">
+          <a href="#/privacy-policy">Privacy Policy</a>
+          <a href="#/terms">Terms & Conditions</a>
+          <a href="#/feedback">Feedback</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Leaflet Map JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Lucide Icons (Universal SVG Injector) -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Application Modules -->
+  <script type="module" src="js/app.js"></script>
+
+</body>
+</html>
