@@ -1,7 +1,7 @@
 /* Shared UI Components Styles (css/components.css) */
 
 /* Disclaimer Top Banner */
-.disclaimer-top-banner {
+/* .disclaimer-top-banner {
   background: linear-gradient(90deg, #1e293b, #0f172a);
   color: #94a3b8;
   font-size: 0.78rem;
@@ -13,7 +13,7 @@
   justify-content: center;
   gap: 0.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
+} */
 
 .disclaimer-top-banner span {
   letter-spacing: 0.2px;
